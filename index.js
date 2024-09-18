@@ -42,21 +42,30 @@ function addNumber(number) {
 //The number added into the field will be added to the number array and then will appear in the Number Bank
 function renderNumberBank(number) {
     const $output = document.querySelector("output");
-    const $numbers = numbers.map((number) => {
-        $output.textContent = number;
-        console.log(numbers)
-    })
+    $output.textContent = number;
     $output.replaceChildren(...numbers);
 }
 
-function sortOne() { };
+function sortOne() {
+    const $odds = document.querySelector("#odds output");
+    const $evens = document.querySelector("#evens output")
+    if (numbers[0] % 2 !== 0) {
+        odd.push(numbers[0]);
+        numbers.shift();
+        $odds.textContent = numbers[0];
+        $odds.replaceChildren(...odd)
+    } else {
+        even.push(numbers[0]);
+        numbers.shift();
+        $evens.textContent = numbers[0];
+        $evens.replaceChildren(...even);
+    }
+};
 
 function sortAll() { };
 
 function render() {
     renderNumberBank();
-    sortOne();
-    sortAll();
 }
 // === Script ===
 
@@ -74,5 +83,8 @@ form.addEventListener("submit", (event) => {
     render();
 })
 
-
-console.log(renderNumberBank(6));
+const sortOneButton = document.querySelector("#sortOne");
+sortOneButton.addEventListener("click", () => {
+    sortOne();
+    render();
+})
