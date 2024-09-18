@@ -95,7 +95,6 @@ form.addEventListener("submit", (event) => {
     addNumber($number.value);
     $number.value = "";
 
-
     render();
 })
 
