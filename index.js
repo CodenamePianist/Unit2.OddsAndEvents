@@ -77,6 +77,7 @@ function sortAll() {
             $evens.replaceChildren(...even);
         }
     }
+    numbers.length = 0;
 };
 
 function render() {
