@@ -32,6 +32,7 @@ const numbers = [];
 const even = [];
 const odd = [];
 
+
 //Get the number into the numbers array
 function addNumber(number) {
     numbers.push(number);
@@ -48,7 +49,7 @@ function renderNumberBank(number) {
 
 function sortOne() {
     const $odds = document.querySelector("#odds output");
-    const $evens = document.querySelector("#evens output")
+    const $evens = document.querySelector("#evens output");
     if (numbers[0] % 2 !== 0) {
         odd.push(numbers[0]);
         numbers.shift();
@@ -62,7 +63,21 @@ function sortOne() {
     }
 };
 
-function sortAll() { };
+function sortAll() {
+    const $odds = document.querySelector("#odds output");
+    const $evens = document.querySelector("#evens output");
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] % 2 !== 0) {
+            odd.push(numbers[i]);
+            $odds.textContent = numbers[i];
+            $odds.replaceChildren(...odd);
+        } else {
+            even.push(numbers[i]);
+            $evens.textContent = numbers[i];
+            $evens.replaceChildren(...even);
+        }
+    }
+};
 
 function render() {
     renderNumberBank();
@@ -79,12 +94,18 @@ form.addEventListener("submit", (event) => {
     addNumber($number.value);
     $number.value = "";
 
-    console.log("123");
+
     render();
 })
 
 const sortOneButton = document.querySelector("#sortOne");
 sortOneButton.addEventListener("click", () => {
     sortOne();
+    render();
+})
+
+const sortAllButton = document.querySelector("#sortAll");
+sortAllButton.addEventListener("click", () => {
+    sortAll();
     render();
 })
